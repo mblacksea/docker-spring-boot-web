@@ -1,0 +1,8 @@
+FROM openjdk
+
+RUN yum install -y java
+
+VOLUME /tmp
+ADD /maven/${fileName}.jar ${fileName}.jar
+RUN sh -c 'touch /myapp.jar'
+ENTRYPOINT ["java" , "-Djava.security.edg=file:dev/./urandom" , "-jar" , "/${fileName}.jar"]
